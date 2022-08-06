@@ -15,6 +15,8 @@ const ListComponent = forwardRef((props, ref) => {
     },
   ]);
 
+
+
   const [headerText, setHeaderText] = useState([
     '필드1', '필드2', '필드3',
   ]);

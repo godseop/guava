@@ -8,18 +8,33 @@ const Test = (props) => {
 
   const listRef = useRef(null);
 
+  const [condition, setCondition] = useState({
+    WH_CD: '',
+    STRR_ID: '',
+    CUST_CD: '',
+  });
+
   const Condition = () => {
 
     const search = () => {
+      alert(JSON.stringify(condition));
       setViewCondition(false);
       setViewList(true);
     }
 
+    const onChangeCondition = (e) => {
+      console.log(e);
+      setCondition({
+        ...condition,
+        [e.target.name]: e.target.value,
+      })
+    }
+
     return (
       <div>
-        <input type='text'/>
-        <input type='text'/>
-        <input type='text'/>
+        <input type='text' name='WH_CD' value={condition.WH_CD} onChange={onChangeCondition}/>
+        <input type='text' name='STRR_ID' value={condition.STRR_ID} onChange={onChangeCondition}/>
+        <input type='text' name='CUST_CD' value={condition.CUST_CD} onChange={onChangeCondition}/>
         <br/>
         <button onClick={search}>검색</button>
       </div>
