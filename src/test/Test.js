@@ -1,13 +1,16 @@
 import ListComponent from "../common/ListComponent";
 import {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import DetailComponent from "../common/DetailComponent";
 
 const Test = (props) => {
 
   const [viewCondition, setViewCondition] = useState(true);
   const [viewList, setViewList] = useState(false);
+  const [viewDetail, setViewDetail] = useState(false);
 
   const listRef = useRef(null);
+  const detailRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -54,6 +57,10 @@ const Test = (props) => {
     setViewList(false);
   }
 
+  const onSelect = () => {
+    setViewList(false);
+    setViewDetail(true);
+  }
 
   return (
     <div>
@@ -67,9 +74,13 @@ const Test = (props) => {
       </div>
 
       <div className={viewList ? 'visible' : 'hidden'}>
-        <ListComponent ref={listRef}/>
+        <ListComponent ref={listRef} onSelect={onSelect}/>
         <br/>
         <button onClick={back}>뒤로</button>
+      </div>
+
+      <div className={viewDetail ? 'visible' : 'hidden'}>
+        <DetailComponent ref={detailRef}/>
       </div>
     </div>
   )
