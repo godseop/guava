@@ -1,4 +1,5 @@
 import {forwardRef, useImperativeHandle, useState} from "react";
+import {v4 as uuidv4} from 'uuid';
 
 const DetailComponent = forwardRef((props, ref) => {
 
@@ -28,7 +29,7 @@ const DetailComponent = forwardRef((props, ref) => {
       {
         Object.entries(dataSource).map(([key, value], index, row) => {
           return (
-              <tr>
+              <tr key={uuidv4()}>
                 <td>{headerText[index]}</td>
                 <td>{value}</td>
               </tr>

@@ -1,4 +1,5 @@
 import {forwardRef, useImperativeHandle, useState} from "react";
+import {v4 as uuidv4} from 'uuid';
 
 const ListComponent = forwardRef((props, ref) => {
 
@@ -27,17 +28,23 @@ const ListComponent = forwardRef((props, ref) => {
     }
   }));
 
+  const onClick = (e) => {
+    if (props.onSelect) {
+      props.onSelect(e);
+    }
+  }
+
 
   return (
     <table>
       <thead></thead>
       <tbody>
       {
-        dataSource.map(obj => {
+        dataSource.map(object => {
           return (
-            Object.entries(obj).map(([key, value], index, row) => {
+            Object.entries(object).map(([key, value], index, row) => {
               return (
-                <tr>
+                <tr key={uuidv4()} onClick={onClick}>
                   <td>{headerText[index]}</td>
                   <td>{value}</td>
                 </tr>

@@ -57,11 +57,10 @@ const Test = () => {
     setViewList(false);
   }
 
-  const onSelect = (data) => {
+  const onSelect = (e) => {
     setViewList(false);
     setViewDetail(true);
 
-    alert(data);
     detailRef.current.setData({
         FIELD1: 'asd',
         FIELD2: 'ㅈㄷㅈㄷㄹ',
