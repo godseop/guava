@@ -3,7 +3,7 @@ import {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import DetailComponent from "../common/DetailComponent";
 
-const Test = (props) => {
+const Test = () => {
 
   const [viewCondition, setViewCondition] = useState(true);
   const [viewList, setViewList] = useState(false);
@@ -57,9 +57,22 @@ const Test = (props) => {
     setViewList(false);
   }
 
-  const onSelect = () => {
+  const onSelect = (data) => {
     setViewList(false);
     setViewDetail(true);
+
+    alert(data);
+    detailRef.current.setData({
+        FIELD1: 'asd',
+        FIELD2: 'ㅈㄷㅈㄷㄹ',
+        FIELD3: '455',
+        FIELD4: 'ㅅㄹㅎㅎ',
+        FIELD5: 'sldkfjlskdjf',
+    });
+  }
+
+  const save = () => {
+
   }
 
   return (
@@ -81,6 +94,9 @@ const Test = (props) => {
 
       <div className={viewDetail ? 'visible' : 'hidden'}>
         <DetailComponent ref={detailRef}/>
+        <br/>
+        <button onClick={back}>뒤로</button>
+        <button onClick={save}>저장</button>
       </div>
     </div>
   )
