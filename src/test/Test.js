@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import DetailComponent from "../common/DetailComponent";
 import GridComponent from "../common/GridComponent";
 import ColumnComponent from "../common/ColumnComponent";
+import ElementComponent from "../common/ElementComponent";
 
 const Test = () => {
 
@@ -32,14 +33,19 @@ const Test = () => {
 
     listRef.current.setData([
       {
-        FIELD1: 'asd',
-        FIELD2: 'ㅈㄷㅈㄷㄹ',
-        FIELD3: '455',
+        FIELD3: '[0]필드3',
+        FIELD2: '[0]필드2',
+        FIELD1: '[0]필드1',
       },
       {
-        FIELD1: 'qoiefjdl',
-        FIELD2: '123',
-        FIELD3: 'ert,j',
+        FIELD1: '[1]필드1',
+        FIELD3: '[1]필드3',
+        FIELD2: '[1]필드2',
+      },
+      {
+        FIELD2: '[2]필드2',
+        FIELD3: '[2]필드3',
+        FIELD1: '[2]필드1',
       },
     ]);
   }
@@ -59,16 +65,21 @@ const Test = () => {
     setViewList(false);
   }
 
-  const onSelect = (e) => {
+  const goList = () => {
+    setViewList(true);
+    setViewDetail(false);
+  }
+
+  const onClickRow = (e) => {
     setViewList(false);
     setViewDetail(true);
 
-    detailRef.current.setData({
-        FIELD1: 'asd',
-        FIELD2: 'ㅈㄷㅈㄷㄹ',
-        FIELD3: '455',
-        FIELD4: 'ㅅㄹㅎㅎ',
-        FIELD5: 'sldkfjlskdjf',
+    detailRef.current.setDetailData({
+      FIELD3: '값3',
+      FIELD2: '값2',
+      FIELD1: '값1',
+      FIELD5: '값5',
+      FIELD4: '값4',
     });
   }
 
@@ -79,28 +90,34 @@ const Test = () => {
   return (
     <div>
       <div className={viewCondition ? 'visible' : 'hidden'}>
-        <input type='text' name='WH_CD' value={condition.WH_CD} onChange={onChangeCondition} />
-        <input type='text' name='STRR_ID' value={condition.STRR_ID} onChange={onChangeCondition}/>
-        <input type='text' name='CUST_CD' value={condition.CUST_CD} onChange={onChangeCondition}/>
+        <input type='text' name='CONDITION1' value={condition.CONDITION1} onChange={onChangeCondition} />
+        <input type='text' name='CONDITION2' value={condition.CONDITION2} onChange={onChangeCondition}/>
+        <input type='text' name='CONDITION3' value={condition.CONDITION3} onChange={onChangeCondition}/>
         <br/>
         <button onClick={search}>검색</button>
         <button onClick={main}>뒤로</button>
       </div>
 
       <div className={viewList ? 'visible' : 'hidden'}>
-        <GridComponent ref={listRef} onSelect={onSelect}>
-          <ColumnComponent field='' headerText=''/>
-          <ColumnComponent field='' headerText=''/>
-          <ColumnComponent field='' headerText=''/>
+        <GridComponent ref={listRef} onClickRow={onClickRow}>
+          <ColumnComponent field='FIELD1' headerText='필드1'/>
+          <ColumnComponent field='FIELD2' headerText='필드2'/>
+          <ColumnComponent field='FIELD3' headerText='필드3'/>
         </GridComponent>
         <br/>
         <button onClick={back}>뒤로</button>
       </div>
 
       <div className={viewDetail ? 'visible' : 'hidden'}>
-        <DetailComponent ref={detailRef}/>
+        <DetailComponent ref={detailRef}>
+          <ElementComponent field='FIELD1' headerText='필드1' edit={false} editType='text'/>
+          <ElementComponent field='FIELD2' headerText='필드2' edit={false} editType='text'/>
+          <ElementComponent field='FIELD3' headerText='필드3' edit={true} editType='text'/>
+          <ElementComponent field='FIELD4' headerText='필드4' edit={false} editType='text'/>
+          <ElementComponent field='FIELD5' headerText='필드5' edit={true} editType='text'/>
+        </DetailComponent>
         <br/>
-        <button onClick={back}>뒤로</button>
+        <button onClick={goList}>뒤로</button>
         <button onClick={save}>저장</button>
       </div>
     </div>

@@ -23,7 +23,6 @@ const PopupComponent = (props) => {
   });
 
 
-
   return (
     <div>
       <table>
