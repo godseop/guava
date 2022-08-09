@@ -86,3 +86,4 @@ const DetailComponent = forwardRef((props, ref) => {
 
 export default DetailComponent;
 
+
