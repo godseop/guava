@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
-import one from "./one";
 
 
 const PopupComponent = (props) => {
 
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState([
+    {
+      VALUE1: 'A',
+    },
+    {
+      VALUE1: 'B',
+    },
+    {
+      VALUE1: 'C',
+    },
+  ]);
 
   // 팝업 옵션
   const [popupOption, setPopupOption] = useState({
@@ -13,6 +22,7 @@ const PopupComponent = (props) => {
     condition: {},       // 기본 조회조건
   });
 
+
   return (
     <div>
       <table>
@@ -20,18 +30,15 @@ const PopupComponent = (props) => {
           <th>셀</th>
         </thead>
         <tbody>
-        <tr>
-          <td>값1</td>
-        </tr>
-        <tr>
-          <td>값2</td>
-        </tr>
-        <tr>
-          <td>값3</td>
-        </tr>
-        <tr>
-          <td>값4</td>
-        </tr>
+        {
+          dataSource.map((data) => {
+            return (
+              <tr onClick={(e) => { props.onClosePopup(data)}}>
+                <td>{data.VALUE1}</td>
+              </tr>
+            );
+          })
+        }
         </tbody>
       </table>
       <button onClick={props.onClosePopup}>뒤로</button>
