@@ -4,7 +4,6 @@ import DetailComponent from "../common/DetailComponent";
 import GridComponent from "../common/GridComponent";
 import ColumnComponent from "../common/ColumnComponent";
 import ElementComponent from "../common/ElementComponent";
-import PopupComponent from "../common/PopupComponent";
 
 const Test = () => {
 
@@ -121,8 +120,6 @@ const Test = () => {
         <button onClick={goList}>뒤로</button>
         <button onClick={save}>저장</button>
       </div>
-
-      {viewPopup && <PopupComponent/>}
     </div>
   )
 }
