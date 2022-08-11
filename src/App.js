@@ -1,14 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Test from "./test/Test";
+import Main from "./test/Main";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/test" element={<Test/>}/>
+          <Route path="/" element={<Main/>}/>
         </Routes>
       </BrowserRouter>
     </div>
