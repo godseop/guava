@@ -1,9 +1,9 @@
 import {forwardRef} from "react";
 
-const TextComponent = forwardRef((props, ref) => {
+const TextBox = forwardRef((props, ref) => {
 
   const onChange = (e) => {
-    props.onChange(e.target.value);
+    props.onChange(e);
   }
 
   return (
@@ -13,4 +13,4 @@ const TextComponent = forwardRef((props, ref) => {
   );
 })
 
-export default TextComponent;
+export default TextBox;
