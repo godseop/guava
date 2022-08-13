@@ -1,9 +1,10 @@
+import React from 'react';
 
 const Error = (props) => {
 
   return (
     <div>
-      에러발생!
+      Error
     </div>
   );
 }

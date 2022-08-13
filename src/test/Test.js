@@ -1,3 +1,4 @@
+import React from 'react';
 import {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import DetailComponent from "../common/DetailComponent";
@@ -16,7 +17,7 @@ const Test = () => {
   const [viewCondition, setViewCondition] = useState(true);
   const [viewList, setViewList] = useState(false);
   const [viewDetail, setViewDetail] = useState(false);
-  const [viewPopup, setViewPopup] = useState(false);
+  //const [viewPopup, setViewPopup] = useState(false);
 
   const listRef = useRef(null);
   const detailRef = useRef(null);
