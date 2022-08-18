@@ -1,4 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
+import axios from "axios";
 
 
 const useInitialData = (requests) => {
@@ -9,7 +10,12 @@ const useInitialData = (requests) => {
   });
 
   useEffect(() => {
-
+    requests.forEach(request => {
+      const response = axios.post(
+        request.url,
+        request.condition,
+      );
+    });
   }, []);
 
 
@@ -18,13 +24,13 @@ const useInitialData = (requests) => {
   }, [state, requests.length]);
 
   const isComplete = () => {
-
+    return state.cnt === requests.length
   }
 
-  const callRequest = async (requests) => {
-
-
-  }
+  return {
+    initialData: state.obj,
+    isInitialized: isComplete(),
+  };
 }
 
 export default useInitialData;
