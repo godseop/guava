@@ -42,7 +42,7 @@ const ElementComponent = (props) => {
         </td>
         :
         <td>
-          {data[field]}
+          {typeof(data[field]) === 'number' ? data[field].toLocaleString('ko-KR').toFixed(2) : data[field] ?? ''}
         </td>
       }
     </tr>
