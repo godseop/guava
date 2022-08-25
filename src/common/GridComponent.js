@@ -67,12 +67,12 @@ const GridComponent = forwardRef((props, ref) => {
             return (
               Object.entries(object)
                 .map(([key, value]) => {
-                  const headerText = columnInfo.find((item) => item.field === key).headerText;
+                  const column = columnInfo.find((item) => item.field === key);
                   return (
                     <ColumnComponent key={uuid()}
                                      field={key}
                                      value={value}
-                                     headerText={headerText}
+                                     headerText={column.headerText}
                                      onClickRow={(e) => onClickRow(e, object)}/>
                   );
                 })

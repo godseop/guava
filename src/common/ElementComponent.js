@@ -1,51 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 
-const ElementComponent = (props) => {
-
-  const {field, value, headerText, edit, editType, onChangeElement} = props;
-
-  const [data, setData] = useState({
-    [field]: '',
-  });
-
-  useEffect(() => {
-    setData({
-      [field]: value,
-    });
-  }, []);
-
-
-  const onChange = (e) => {
-    e.preventDefault();
-    const {name, value} = e.target;
-    setData({
-      [name]: value,
-    });
-  }
-
-  const onBlur = (e) => {
-    e.preventDefault();
-    const {name, value} = e.target;
-    onChangeElement({
-      [name]: value,
-    });
-  }
+const ElementComponent = () => {
 
   return (
-    <tr>
-      <td>{headerText}</td>
-      {edit
-        ?
-        <td>
-          <input type={editType} name={field} value={data[field]} onChange={onChange} onBlur={onBlur}/>
-        </td>
-        :
-        <td>
-          {typeof(data[field]) === 'number' ? data[field].toLocaleString('ko-KR').toFixed(2) : data[field] ?? ''}
-        </td>
-      }
-    </tr>
+    <></>
   );
 }
 

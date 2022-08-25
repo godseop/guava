@@ -1,6 +1,8 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import {v4 as uuid} from 'uuid';
 import ElementComponent from "./ElementComponent";
+import ComboBox from "./ComboBox";
+import TextBox from "./TextBox";
 
 const DetailComponent = forwardRef((props, ref) => {
 
@@ -17,6 +19,8 @@ const DetailComponent = forwardRef((props, ref) => {
       editType: 'text',
     },
   ]);
+
+  const inputRefs = useRef([]);
 
 
   useImperativeHandle(ref, () => ({
@@ -68,14 +72,39 @@ const DetailComponent = forwardRef((props, ref) => {
         Object.entries(dataSource)
           .map(([key, value]) => {
             const column = columnInfo.find((item) => item.field === key);
+            // return (
+            //   <ElementComponent key={uuid()}
+            //                     field={key}
+            //                     value={dataSource[key]}
+            //                     headerText={column.headerText}
+            //                     edit={column.edit}
+            //                     editType={column.editType}
+            //                     onChangeElement={onChangeElement}/>
+            // );
             return (
-              <ElementComponent key={uuid()}
-                                field={key}
-                                value={dataSource[key]}
-                                headerText={column.headerText}
-                                edit={column.edit}
-                                editType={column.editType}
-                                onChangeElement={onChangeElement}/>
+              <tr>
+                <td>{column.headerText}</td>
+                {column.edit
+                  ?
+                  column.editType === 'combo' ?
+                    <td>
+                      <ComboBox ref={r => inputRefs.current[key] = r}
+                                name={key}
+                                defaultValue={dataSource[key] ?? ''}
+                                dataSource={column.dataSource}/>
+                    </td>
+                    :
+                    <td>
+                      <TextBox ref={r => inputRefs.current[key] = r}
+                               name={key}
+                               defaultValue={dataSource[key] ?? ''}/>
+                    </td>
+                  :
+                  <td>
+                    {typeof(dataSource[key]) === 'number' ? dataSource[key].toLocaleString('ko-KR').toFixed(2) : dataSource[key] ?? ''}
+                  </td>
+                }
+              </tr>
             );
           })
       }
